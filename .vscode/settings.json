@@ -1,0 +1,22 @@
+{
+  "typescript.tsdk": "node_modules/typescript/lib/",
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#05f2ff",
+    "activityBar.activeBackground": "#05f2ff",
+    "activityBar.activeBorder": "#ff40f5",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#ff40f5",
+    "activityBarBadge.foreground": "#15202b",
+    "titleBar.activeBackground": "#00c6d1",
+    "titleBar.inactiveBackground": "#00c6d199",
+    "titleBar.activeForeground": "#15202b",
+    "titleBar.inactiveForeground": "#15202b99",
+    "statusBar.background": "#00c6d1",
+    "statusBarItem.hoverBackground": "#00969e",
+    "statusBar.foreground": "#15202b"
+  },
+  "peacock.color": "#00c6d1",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+}

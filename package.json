@@ -1,0 +1,111 @@
+{
+  "name": "scully-plugin-mermaid",
+  "version": "0.0.1",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build scully-mermaid",
+    "build:lib": "ng build scully-plugin-mermaid --prod",
+    "lint": "ng lint",
+    "format": "prettier --write \"projects/**/*.ts\"",
+    "prebuild:lib": "npm run format && npm run lint && echo Using TypeScript && tsc --version",
+    "postbuild:lib": "npm run copy && npm run addVersion",
+    "copy": "copyfiles CHANGELOG.md README.md LICENSE dist/scully-plugin-mermaid",
+    "addVersion": "cd dist/scully-plugin-mermaid && npm version -allow-same-version \"$(node -e \"console.log(require('../../package.json').version)\")\"",
+    "release": "standard-version && npm run build:lib",
+    "release:beta": "standard-version --prerelease && npm run build:lib",
+    "publish": "cd dist/scully-plugin-mermaid && npm publish",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:manual": "npm run build:lib && npm run build -- --prod && npm run scully && npm run scully:serve",
+    "scully": "scully --scanRoutes",
+    "scully:serve": "scully serve"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "~10.0.0",
+    "@angular/common": "~10.0.0",
+    "@angular/compiler": "~10.0.0",
+    "@angular/core": "~10.0.0",
+    "@angular/forms": "~10.0.0",
+    "@angular/platform-browser": "~10.0.0",
+    "@angular/platform-browser-dynamic": "~10.0.0",
+    "@angular/router": "~10.0.0",
+    "@briebug/jest-schematic": "^2.1.1",
+    "@scullyio/ng-lib": "^1.0.0-beta.0",
+    "@scullyio/scully": "^1.0.0-beta.2",
+    "jsdom": "^16.4.0",
+    "mermaid-render": "^1.0.8",
+    "rxjs": "~6.5.5",
+    "tslib": "^2.0.0",
+    "zone.js": "~0.10.3"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "~0.1000.0",
+    "@angular-devkit/build-ng-packagr": "^0.1000.0",
+    "@angular/cli": "~10.0.0",
+    "@angular/compiler-cli": "~10.0.0",
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@scullyio/init": "^1.0.0-beta.0",
+    "@types/jasmine": "~3.5.0",
+    "@types/jasminewd2": "~2.0.3",
+    "@types/jest": "25.2.3",
+    "@types/node": "^12.11.1",
+    "codelyzer": "^6.0.0-next.1",
+    "commitizen": "^4.1.2",
+    "copyfiles": "^2.2.0",
+    "cz-conventional-changelog": "^3.2.0",
+    "husky": "^4.2.5",
+    "jasmine-core": "~3.5.0",
+    "jasmine-spec-reporter": "~5.0.0",
+    "jest": "26.0.1",
+    "jest-preset-angular": "8.2.0",
+    "ng-packagr": "^10.0.0",
+    "prettier": "^2.0.5",
+    "replace": "^1.2.0",
+    "rimraf": "^3.0.2",
+    "standard-version": "^8.0.0",
+    "karma": "~5.0.0",
+    "karma-chrome-launcher": "~3.1.0",
+    "karma-coverage-istanbul-reporter": "~3.0.2",
+    "karma-jasmine": "~3.3.0",
+    "karma-jasmine-html-reporter": "^1.5.0",
+    "ts-node": "~8.3.0",
+    "tslint": "~6.1.0",
+    "typescript": "~3.9.5"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "jest": {
+    "preset": "jest-preset-angular",
+    "roots": [
+      "projects"
+    ],
+    "transform": {
+      "^.+\\.(ts|js|html)$": "ts-jest"
+    },
+    "setupFilesAfterEnv": [
+      "<rootDir>/projects/setup-jest.ts"
+    ],
+    "moduleNameMapper": {},
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "<rootDir>/projects/scully-plugin-mermaid/tsconfig.spec.json",
+        "stringifyContentPathRegex": "\\.html$",
+        "astTransformers": [
+          "jest-preset-angular/build/InlineFilesTransformer",
+          "jest-preset-angular/build/StripStylesTransformer"
+        ]
+      }
+    }
+  }
+}

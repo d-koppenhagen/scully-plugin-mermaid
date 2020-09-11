@@ -1,0 +1,37 @@
+{
+  "name": "scully-plugin-mermaid",
+  "description": "this plugin for Scully provides a postRenderer to generate a SVGs from mermaid source code sections",
+  "license": "MIT",
+  "repository": "https://github.com/d-koppenhagen/scully-plugin-mermaid",
+  "author": "Danny Koppenhagen <mail@d-koppenhagen.de> (https://d-koppenhagen.de)",
+  "homepage": "https://github.com/d-koppenhagen/scully-plugin-mermaid",
+  "keywords": [
+    "scully",
+    "mermaid",
+    "postRenderer",
+    "angular",
+    "ssr",
+    "ssg",
+    "JAMStack"
+  ],
+  "bugs": {
+    "url": "https://github.com/d-koppenhagen/scully-plugin-mermaid/issues",
+    "email": "mail@d-koppenhagen.de"
+  },
+  "scripts": {
+    "release": "standard-version"
+  },
+  "peerDependencies": {
+    "@angular/common": "^9.0.0 || ^10.0.0 || ^11.0.0-0",
+    "@angular/core": "^9.0.0 || ^10.0.0 || ^11.0.0-0",
+    "@scullyio/scully": "1.0.0-beta.2"
+  },
+  "dependencies": {
+    "jsdom": "^16.4.0",
+    "mermaid-render": "^1.0.8",
+    "tslib": "^2.0.1"
+  },
+  "devDependencies": {
+    "@types/jsdom": "^16.2.3"
+  }
+}
