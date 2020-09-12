@@ -7,6 +7,8 @@
   "homepage": "https://github.com/d-koppenhagen/scully-plugin-mermaid",
   "keywords": [
     "scully",
+    "scully-plugin",
+    "scully-plugin-registry",
     "mermaid",
     "postRenderer",
     "angular",
