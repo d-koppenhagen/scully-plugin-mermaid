@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.8](https://github.com/d-koppenhagen/scully-plugin-mermaid/compare/v0.0.7...v0.0.8) (2020-09-12)
+
+
+### Bug Fixes
+
+* replace whole `pre` element ([469acba](https://github.com/d-koppenhagen/scully-plugin-mermaid/commit/469acba181b481ac7319f5c601c13e7ccacdaf6b))
+
 ### [0.0.7](https://github.com/d-koppenhagen/scully-plugin-mermaid/compare/v0.0.6...v0.0.7) (2020-09-12)
 
 ### [0.0.6](https://github.com/d-koppenhagen/scully-plugin-mermaid/compare/v0.0.5...v0.0.6) (2020-09-12)
