@@ -19,23 +19,21 @@ export const mermaidPlugin = async (html: string, routeData: HandledRoute) => {
     const dom = new JSDOM(html);
     const { window } = dom;
 
-    const elements = [].slice.call(
-      window.document.querySelectorAll('.language-mermaid'),
-    );
+    const nodeList = window.document.querySelectorAll('.language-mermaid');
+    const elements = [].slice.call(nodeList);
 
     mermaidMatches = elements.length;
 
-    for (const el of elements) {
-      const svgCode = await renderMermaid(el.textContent, {
+    for (let i = 0; i < elements.length; i++) {
+      const svgCode = await renderMermaid(elements[i].textContent, {
         initParams: Promise.resolve(mermaidConfig),
       });
-      /*
-      const mermaidDivEl = window.document.createElement('div');
-      mermaidDivEl.className = 'mermaid-svg';
-      mermaidDivEl.innerHTML = svgCode;
-      nodeList.item(i).parentElement.replaceWith(mermaidDivEl);
-      */
-      el.innerHTML = svgCode;
+      if (svgCode) {
+        const mermaidDivEl = window.document.createElement('div');
+        mermaidDivEl.className = 'mermaid-svg';
+        mermaidDivEl.innerHTML = svgCode;
+        nodeList.item(i).parentElement.replaceWith(mermaidDivEl);
+      }
     }
     log(`Rendered ${mermaidMatches} Mermaid SVGs`);
     return Promise.resolve(dom.serialize());
