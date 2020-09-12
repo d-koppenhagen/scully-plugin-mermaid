@@ -10,7 +10,7 @@
     "format": "prettier --write \"projects/**/*.ts\"",
     "prebuild:lib": "npm run format && npm run lint && echo Using TypeScript && tsc --version",
     "postbuild:lib": "npm run copy && npm run addVersion",
-    "copy": "copyfiles CHANGELOG.md README.md LICENSE dist/scully-plugin-mermaid",
+    "copy": "copyfiles assets/* CHANGELOG.md README.md LICENSE dist/scully-plugin-mermaid",
     "addVersion": "cd dist/scully-plugin-mermaid && npm version -allow-same-version \"$(node -e \"console.log(require('../../package.json').version)\")\"",
     "release": "standard-version && npm run build:lib",
     "release:beta": "standard-version --prerelease && npm run build:lib",
