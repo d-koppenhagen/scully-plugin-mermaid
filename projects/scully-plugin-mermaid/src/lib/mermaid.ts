@@ -28,11 +28,10 @@ export const mermaidPlugin = async (html: string, routeData: HandledRoute) => {
       const svgCode = await renderMermaid(nodeList.item(i).textContent, {
         initParams: Promise.resolve(mermaidConfig),
       });
-      const preEl = nodeList.item(i).parentElement;
       const mermaidDivEl = window.document.createElement('div');
       mermaidDivEl.className = 'mermaid-svg';
       mermaidDivEl.innerHTML = svgCode;
-      preEl.replaceWith(mermaidDivEl);
+      nodeList.item(i).parentElement.replaceWith(mermaidDivEl);
     }
     log(`Rendered ${mermaidMatches} Mermaid SVGs`);
     return Promise.resolve(dom.serialize());
