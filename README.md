@@ -1,6 +1,5 @@
 # scully-plugin-mermaid - The mermaid  `postRenderer`
 
-![Build Status](https://github.com/d-koppenhagen/scully-plugin-mermaid/workflows/Node.js%20CI/badge.svg)
 [![npm](https://img.shields.io/npm/v/scully-plugin-mermaid.svg)](https://www.npmjs.com/package/scully-plugin-mermaid)
 [![Dependency Status](https://david-dm.org/d-koppenhagen/scully-plugin-mermaid.svg)](https://david-dm.org/d-koppenhagen/scully-plugin-mermaid)
 [![devDependency Status](https://david-dm.org/d-koppenhagen/scully-plugin-mermaid/dev-status.svg)](https://david-dm.org/d-koppenhagen/scully-plugin-mermaid?type=dev)
