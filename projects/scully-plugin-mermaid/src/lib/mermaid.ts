@@ -47,7 +47,7 @@ export const mermaidPlugin = async (html: string, routeData: HandledRoute) => {
 
     for (let i = 0; i < elements.length; i++) {
       const svgCode = await renderMermaid(elements[i].textContent, {
-        initParams: Promise.resolve(pluginConfig.config),
+        initParams: Promise.resolve(pluginConfig.config || {}),
       });
       if (svgCode) {
         let mermaidTargetEl: Element;
