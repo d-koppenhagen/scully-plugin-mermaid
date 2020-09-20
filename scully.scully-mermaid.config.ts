@@ -8,7 +8,9 @@ import {
 /**
  * configuration for the mermaid plugin
  */
-const mermaidOptions: MermaidAPI.Config = {};
+const mermaidOptions: MermaidAPI.Config = {
+  theme: 'dark',
+};
 const MermaidPlugin = getMermaidPlugin();
 setPluginConfig(MermaidPlugin, mermaidOptions);
 

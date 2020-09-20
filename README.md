@@ -80,3 +80,5 @@ sequenceDiagram
 The above example will result in a graphic like this one:
 
 ![rendered mermaid image example](assets/example.svg)
+
+The resulting SVG is wrapped into an HTML `<div>` element with the class `mermaid-svg` that allows you easily to adjust some further styles.

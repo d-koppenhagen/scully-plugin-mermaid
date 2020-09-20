@@ -10,33 +10,48 @@ import { renderMermaid } from 'mermaid-render';
 import { MermaidPluginName } from './constants';
 import MermaidAPI from 'mermaid/mermaidAPI';
 
+const selector = '.language-mermaid';
+
 export const mermaidPlugin = async (html: string, routeData: HandledRoute) => {
   const mermaidConfig = getPluginConfig<MermaidAPI.Config>(MermaidPluginName);
   let mermaidMatches = 0;
   const route = routeData.route;
   try {
-    // TODO: try to modify and return updated HTML
     const dom = new JSDOM(html);
     const { window } = dom;
 
-    const elements = [].slice.call(
-      window.document.querySelectorAll('.language-mermaid'),
-    );
+    const nodeList = window.document.querySelectorAll(selector);
+    const elements = [].slice.call(nodeList);
 
+    // count the mermaid matches for logging
     mermaidMatches = elements.length;
 
-    for (const el of elements) {
-      const svgCode = await renderMermaid(el.textContent, {
+    for (let i = 0; i < elements.length; i++) {
+      const svgCode = await renderMermaid(elements[i].textContent, {
         initParams: Promise.resolve(mermaidConfig),
       });
-      /*
-      const mermaidDivEl = window.document.createElement('div');
-      mermaidDivEl.className = 'mermaid-svg';
-      mermaidDivEl.innerHTML = svgCode;
-      nodeList.item(i).parentElement.replaceWith(mermaidDivEl);
-      */
-      el.innerHTML = svgCode;
+      if (svgCode) {
+        const mermaidDivEl = window.document.createElement('div');
+        mermaidDivEl.className = 'mermaid-svg';
+        mermaidDivEl.innerHTML = svgCode;
+
+        const tagName = nodeList.item(i).tagName;
+        if (tagName === 'PRE') {
+          nodeList.item(i).replaceWith(mermaidDivEl); // replace the whole `pre`-Element
+        } else if (tagName === 'CODE') {
+          nodeList.item(i).parentElement.tagName === 'PRE'
+            ? nodeList.item(i).parentElement.replaceWith(mermaidDivEl) // replace the whole parent `pre`-Element
+            : nodeList.item(i).replaceWith(mermaidDivEl); // replace the `code`-Element
+        } else {
+          logWarn(
+            `Selector '${yellow(
+              selector,
+            )}' matches neither a 'pre' nor a 'code' element. Can't render / insert graphic.`,
+          );
+        }
+      }
     }
+
     log(`Rendered ${mermaidMatches} Mermaid SVGs`);
     return Promise.resolve(dom.serialize());
   } catch (e) {
