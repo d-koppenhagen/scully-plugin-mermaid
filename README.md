@@ -16,28 +16,33 @@
 
 To install this library with `npm` run:
 
-```sh
+```bash
 npm i scully-plugin-mermaid --save-dev
 ```
 
 ## Usage
 
-Apply the postRenderer plugin via your scully config file (`scully.<project-name>.config.ts`):
+Apply the *postRenderer* plugin via your Scully config file (`scully.<project-name>.config.ts`):
 
 ```ts
 /*
 * The options for mermaid will be passed 1:1
 */
-import MermaidAPI from 'mermaid/mermaidAPI';
-import { getMermaidPlugin, MermaidPluginName } from 'scully-plugin-mermaid';
+import { getMermaidPlugin, MermaidPluginName, MermaidPluginConfig } from 'scully-plugin-mermaid';
 
-/**
- * configuration for the mermaid plugin
- * All params as defined here are valid:
- * https://mermaid-js.github.io/mermaid/getting-started/Setup.html#mermaidapi-configuration-defaults
- */
-const mermaidOptions: MermaidAPI.Config = {
-  theme: 'dark',
+const mermaidOptions: MermaidPluginConfig = {
+  /**
+   * '.language-mermaid' is also the default, so no need to define this
+   */
+  selector: '.language-mermaid',
+  /**
+   * configuration for the mermaid plugin
+   * All params as defined here are valid:
+   * https://mermaid-js.github.io/mermaid/getting-started/Setup.html#mermaidapi-configuration-defaults
+   */
+  config: {
+    theme: 'dark',
+  }
 };
 const MermaidPlugin = getMermaidPlugin();
 setPluginConfig(MermaidPlugin, mermaidOptions);
@@ -63,7 +68,7 @@ You can use any of the described mermaid config parameter.
 
 ## Example
 
-After running the postRenderer it will convert markdown content like the following into SVG graphics:
+After running the *postRenderer* it will convert markdown content like the following into SVG graphics:
 
 <pre class="language-text"><code class="language-text">```mermaid
 sequenceDiagram

@@ -1,15 +1,15 @@
 import { ScullyConfig, setPluginConfig } from '@scullyio/scully';
-import MermaidAPI from 'mermaid/mermaidAPI';
 import {
   getMermaidPlugin,
   MermaidPluginName,
+  MermaidPluginConfig,
 } from './dist/scully-plugin-mermaid';
 
 /**
  * configuration for the mermaid plugin
  */
-const mermaidOptions: MermaidAPI.Config = {
-  theme: 'dark',
+const mermaidOptions: MermaidPluginConfig = {
+  config: { theme: 'dark' },
 };
 const MermaidPlugin = getMermaidPlugin();
 setPluginConfig(MermaidPlugin, mermaidOptions);

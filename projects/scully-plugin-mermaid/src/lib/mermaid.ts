@@ -8,12 +8,13 @@ import {
 import { JSDOM } from 'jsdom';
 import { renderMermaid } from 'mermaid-render';
 import { MermaidPluginName } from './constants';
-import MermaidAPI from 'mermaid/mermaidAPI';
+import { MermaidPluginConfig } from './interfaces';
 
-const selector = '.language-mermaid';
+const defaultSelector = '.language-mermaid';
 
 export const mermaidPlugin = async (html: string, routeData: HandledRoute) => {
-  const mermaidConfig = getPluginConfig<MermaidAPI.Config>(MermaidPluginName);
+  const pluginConfig = getPluginConfig<MermaidPluginConfig>(MermaidPluginName);
+  const selector = pluginConfig.selector || defaultSelector;
   let mermaidMatches = 0;
   const route = routeData.route;
   try {
@@ -28,7 +29,7 @@ export const mermaidPlugin = async (html: string, routeData: HandledRoute) => {
 
     for (let i = 0; i < elements.length; i++) {
       const svgCode = await renderMermaid(elements[i].textContent, {
-        initParams: Promise.resolve(mermaidConfig),
+        initParams: Promise.resolve(pluginConfig.config),
       });
       if (svgCode) {
         const mermaidDivEl = window.document.createElement('div');

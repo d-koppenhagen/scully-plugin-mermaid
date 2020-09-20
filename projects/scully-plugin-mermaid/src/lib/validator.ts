@@ -1,10 +1,10 @@
 import { getPluginConfig } from '@scullyio/scully';
-import MermaidAPI from 'mermaid/mermaidAPI';
 
 import { MermaidPluginName } from './constants';
+import { MermaidPluginConfig } from './interfaces';
 
 export const validator = async (/* conf */) => {
-  const mermaidConfig = getPluginConfig<MermaidAPI.Config>(MermaidPluginName);
+  const mermaidConfig = getPluginConfig<MermaidPluginConfig>(MermaidPluginName);
   const errors: string[] = [];
   return errors;
 };
