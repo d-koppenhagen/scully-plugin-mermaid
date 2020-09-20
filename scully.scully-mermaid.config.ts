@@ -10,6 +10,10 @@ import {
  */
 const mermaidOptions: MermaidPluginConfig = {
   config: { theme: 'dark' },
+  wrapper: {
+    tagName: 'div',
+    classNames: ['wrapper', 'mermaid-image'],
+  },
 };
 const MermaidPlugin = getMermaidPlugin();
 setPluginConfig(MermaidPlugin, mermaidOptions);
