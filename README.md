@@ -32,9 +32,19 @@ import { getMermaidPlugin, MermaidPluginName, MermaidPluginConfig } from 'scully
 
 const mermaidOptions: MermaidPluginConfig = {
   /**
-   * '.language-mermaid' is also the default, so no need to define this
+   * OPTIONAL: '.language-mermaid' is also the default, so no need to define this
    */
   selector: '.language-mermaid',
+  /**
+   * OPTIONAL: Define the wrapper element for the SVG
+   * When undefined or set to `true`, a `div` with the class `mermaid-svg` is used by default
+   * When set to `false`: No wrapper is used (SVG is added directly)
+   * When defined as an object, `tagName` is needed to define the type of the wrapper element (HTML tag)
+   */
+  wrapper: {
+    tagName: 'div', // necessary when object is defined
+    classNames: ['wrapper', 'mermaid-svg'], // optional
+  },
   /**
    * configuration for the mermaid plugin
    * All params as defined here are valid:
@@ -86,4 +96,5 @@ The above example will result in a graphic like this one:
 
 ![rendered mermaid image example](assets/example.svg)
 
-The resulting SVG is wrapped into an HTML `<div>` element with the class `mermaid-svg` that allows you easily to adjust some further styles.
+The resulting SVG is wrapped into an HTML `<div>` element with the class `mermaid-svg` by default.
+This can be changed to other elements / classes by adjusting the options.

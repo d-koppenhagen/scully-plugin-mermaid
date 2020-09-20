@@ -8,13 +8,31 @@ import {
 import { JSDOM } from 'jsdom';
 import { renderMermaid } from 'mermaid-render';
 import { MermaidPluginName } from './constants';
-import { MermaidPluginConfig } from './interfaces';
+import { ElementWrapper, MermaidPluginConfig } from './interfaces';
 
 const defaultSelector = '.language-mermaid';
+const defaultWrapper: ElementWrapper = {
+  tagName: 'div',
+  classNames: ['mermaid-svg'],
+};
 
 export const mermaidPlugin = async (html: string, routeData: HandledRoute) => {
   const pluginConfig = getPluginConfig<MermaidPluginConfig>(MermaidPluginName);
   const selector = pluginConfig.selector || defaultSelector;
+  let useWrapper = true;
+  let wrapper: ElementWrapper = defaultWrapper;
+
+  if (pluginConfig.wrapper === false) {
+    useWrapper = false;
+  }
+
+  if (
+    typeof pluginConfig.wrapper === 'object' &&
+    pluginConfig.wrapper.tagName
+  ) {
+    wrapper = pluginConfig.wrapper;
+  }
+
   let mermaidMatches = 0;
   const route = routeData.route;
   try {
@@ -32,17 +50,28 @@ export const mermaidPlugin = async (html: string, routeData: HandledRoute) => {
         initParams: Promise.resolve(pluginConfig.config),
       });
       if (svgCode) {
-        const mermaidDivEl = window.document.createElement('div');
-        mermaidDivEl.className = 'mermaid-svg';
-        mermaidDivEl.innerHTML = svgCode;
+        let mermaidTargetEl: Element;
+        if (!useWrapper) {
+          const templateEl = window.document.createElement('template');
+          templateEl.innerHTML = svgCode.trim();
+          mermaidTargetEl = templateEl.content.firstElementChild;
+        } else {
+          mermaidTargetEl = window.document.createElement(
+            wrapper.tagName.toLowerCase(),
+          );
+          if (wrapper.classNames.length) {
+            mermaidTargetEl.className = wrapper.classNames.join(' ');
+          }
+          mermaidTargetEl.innerHTML = svgCode;
+        }
 
         const tagName = nodeList.item(i).tagName;
         if (tagName === 'PRE') {
-          nodeList.item(i).replaceWith(mermaidDivEl); // replace the whole `pre`-Element
+          nodeList.item(i).replaceWith(mermaidTargetEl); // replace the whole `pre`-Element
         } else if (tagName === 'CODE') {
           nodeList.item(i).parentElement.tagName === 'PRE'
-            ? nodeList.item(i).parentElement.replaceWith(mermaidDivEl) // replace the whole parent `pre`-Element
-            : nodeList.item(i).replaceWith(mermaidDivEl); // replace the `code`-Element
+            ? nodeList.item(i).parentElement.replaceWith(mermaidTargetEl) // replace the whole parent `pre`-Element
+            : nodeList.item(i).replaceWith(mermaidTargetEl); // replace the `code`-Element
         } else {
           logWarn(
             `Selector '${yellow(
