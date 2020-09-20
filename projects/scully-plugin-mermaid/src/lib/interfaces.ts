@@ -1,9 +1,9 @@
 import MermaidAPI from 'mermaid/mermaidAPI';
 
 export interface MermaidPluginConfig {
-  selector: string;
-  wrapper: ElementWrapper | boolean;
-  config: MermaidAPI.Config;
+  selector?: string;
+  wrapper?: ElementWrapper | boolean;
+  config?: MermaidAPI.Config;
 }
 
 export interface ElementWrapper {
