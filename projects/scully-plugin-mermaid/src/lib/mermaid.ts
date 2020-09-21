@@ -6,6 +6,8 @@ import {
   yellow,
 } from '@scullyio/scully';
 import { JSDOM } from 'jsdom';
+import MermaidAPI from 'mermaid/mermaidAPI';
+
 import { renderMermaid } from 'mermaid-render';
 import { MermaidPluginName } from './constants';
 import { ElementWrapper, MermaidPluginConfig } from './interfaces';
@@ -46,9 +48,10 @@ export const mermaidPlugin = async (html: string, routeData: HandledRoute) => {
     mermaidMatches = elements.length;
 
     for (let i = 0; i < elements.length; i++) {
-      const svgCode = await renderMermaid(elements[i].textContent, {
-        initParams: Promise.resolve(pluginConfig.config || {}),
-      });
+      const svgCode = await getSvg(
+        elements[i].textContent,
+        pluginConfig.config,
+      );
       if (svgCode) {
         let mermaidTargetEl: Element;
         if (!useWrapper) {
@@ -89,4 +92,13 @@ export const mermaidPlugin = async (html: string, routeData: HandledRoute) => {
   }
   // in case of failure return unchanged HTML to keep flow going
   return Promise.resolve(html);
+};
+
+export const getSvg = (
+  data: string,
+  config?: MermaidAPI.Config,
+): Promise<string> => {
+  return renderMermaid(data, {
+    initParams: Promise.resolve(config || {}),
+  });
 };
