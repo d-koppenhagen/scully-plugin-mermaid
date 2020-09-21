@@ -2,6 +2,48 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0](https://github.com/d-koppenhagen/scully-plugin-mermaid/compare/v0.0.9...v1.0.0) (2020-09-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* The configuration no longer only passes through the `MermaidAPI.Config`. This is now wrapped into the `config` key in the new interface `MermaidPluginConfig` that holds more options.
+
+**Old**:
+```
+import MermaidAPI from 'mermaid/mermaidAPI';
+
+// ...
+
+const mermaidOptions: MermaidAPI.Config = {
+  theme: 'dark',
+};
+```
+
+**New**:
+```
+import { /* ... */, MermaidPluginConfig } from 'scully-plugin-mermaid';
+
+// ...
+
+const mermaidOptions: MermaidPluginConfig = {
+  // ... other config options
+  config: { theme: 'dark' }
+};
+```
+
+### Features
+
+* allow to define the selector for mermaid content ([fd8c59d](https://github.com/d-koppenhagen/scully-plugin-mermaid/commit/fd8c59d09edac1da04f52d20181a526aac393ab0)), closes [#2](https://github.com/d-koppenhagen/scully-plugin-mermaid/issues/2)
+* allow to define the wrapper-element ([3209e0c](https://github.com/d-koppenhagen/scully-plugin-mermaid/commit/3209e0ca39e1e7e9c1bd33aeadc8d65ed54bffcb)), closes [#3](https://github.com/d-koppenhagen/scully-plugin-mermaid/issues/3)
+
+
+### Bug Fixes
+
+* export MermaidPluginConfig ([fed8729](https://github.com/d-koppenhagen/scully-plugin-mermaid/commit/fed8729e2dddc8abfb89af0fea35b623f0935e9d))
+* make config params optional ([6f94fe4](https://github.com/d-koppenhagen/scully-plugin-mermaid/commit/6f94fe4dffd788a5e053adb2bdaf048e8387a15f))
+* replace the whole `pre`-Element ([5f7915a](https://github.com/d-koppenhagen/scully-plugin-mermaid/commit/5f7915aa10c168fd1e1bc0a35366e6cebe06c794)), closes [#1](https://github.com/d-koppenhagen/scully-plugin-mermaid/issues/1)
+
 ### [0.0.10](https://github.com/d-koppenhagen/scully-plugin-mermaid/compare/v0.0.9...v0.0.10) (2020-09-20)
 
 
