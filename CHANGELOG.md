@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/d-koppenhagen/scully-plugin-mermaid/compare/v1.0.0...v2.0.0) (2020-11-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* Drop support for Angular 9
+
+### Features
+
+* update to peerDependencies to support Angular 11 ([da6d559](https://github.com/d-koppenhagen/scully-plugin-mermaid/commit/da6d55917ac994f57877b942debc34810071aec8))
+
 ## [1.0.0](https://github.com/d-koppenhagen/scully-plugin-mermaid/compare/v0.0.9...v1.0.0) (2020-09-21)
 
 
